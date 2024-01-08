@@ -3,13 +3,14 @@ const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-serve
 
 const typeDefs = `
   type Query {
-    hello: String
+    hello: String!
     getPerson(name: String, age: Int): String
-    getInt(age: Int): Int
+    getInt(age: Int!): Int
     getFloat(price: Float): Float
     getString: String
     getBoolean: Boolean
     getID: ID
+    getNumbers(numbers: [Int!]!): [Int]
   }
 `;
 
@@ -21,7 +22,8 @@ const resolvers = {
     getFloat: (_, args) => args.price,
     getString: () => "Word",
     getBoolean: () => 1 === 1,
-    getID: () => "u1232432"
+    getID: () => "u1232432",
+    getNumbers: (_, args) => args.numbers
   }
 }
 
