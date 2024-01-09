@@ -11,8 +11,11 @@ const getProducts = async (_, args) => {
   return product
 }
 
-const addProduct = () => {}
+const addProduct = async (_, { dto }) => {
+  const newProduct = await service.create(dto);
+  return newProduct
+}
 const updateProduct = () => {}
 const deleteProduct = () => {}
 
-module.exports = { getProduct, getProducts }
+module.exports = { getProduct, getProducts, addProduct }
