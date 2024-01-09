@@ -1,28 +1,8 @@
 const { ApolloServer } = require('apollo-server-express')
 const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core')
+const { loadFiles } = require('@graphql-tools/load-files')
 
-const typeDefs = `
-  type Query {
-    hello: String!
-    getPerson(name: String, age: Int): String
-    getInt(age: Int!): Int
-    getFloat(price: Float): Float
-    getString: String
-    getBoolean: Boolean
-    getID: ID
-    getNumbers(numbers: [Int!]!): [Int]
-    getProduct: Product
-  }
 
-  type Product {
-    id: ID!
-    name: String!
-    price: Float!
-    description: String!
-    image: String!
-    createdAt: String!
-  }
-`;
 
 const resolvers = {
   Query: {
@@ -49,7 +29,7 @@ const resolvers = {
 
 const useGraphql = async (app) => {
   const server = new ApolloServer({
-    typeDefs,
+    typeDefs: await loadFiles('./src/**/*.graphql'),
     resolvers,
     playgroud: true,
     plugins: [
