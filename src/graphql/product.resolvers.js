@@ -21,4 +21,9 @@ const deleteProduct = (_, { id }) => {
   return service.delete(id)
 }
 
-module.exports = { getProduct, getProducts, addProduct, updateProduct, deleteProduct }
+const getProductByCategory = (parent) => {
+  const id = parent.dataValues.id;
+  return service.geByCategory(id)
+}
+
+module.exports = { getProduct, getProducts, addProduct, updateProduct, deleteProduct, getProductByCategory }
